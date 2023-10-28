@@ -32,6 +32,9 @@ public class RoomManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+            RegenerateRooms();
+
         if (roomQueue.Count > 0 && roomCount < maxRooms && !generationComplete)
         {
             Vector2Int roomIndex = roomQueue.Dequeue();
@@ -46,7 +49,7 @@ public class RoomManager : MonoBehaviour
         else if (roomCount < minRooms)
         {
             Debug.Log("roomCount was less than minimum amount of rooms, trying again");
-            ResetGeneration();
+            RegenerateRooms();
         }
         else if (!generationComplete)
         {
@@ -55,7 +58,7 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    private void ResetGeneration()
+    private void RegenerateRooms()
     {
         // Clear previous data
         roomObjects.ForEach(Destroy);
